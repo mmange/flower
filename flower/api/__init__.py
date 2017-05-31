@@ -18,7 +18,11 @@ class BaseWebSocketHandler(tornado.websocket.WebSocketHandler):
         if self in listeners:
             listeners.remove(self)
 
+    def check_origin(self, origin):
+        return True
+    
     @classmethod
     def send_message(cls, message):
         for l in cls.listeners:
             l.write_message(message)
+    
